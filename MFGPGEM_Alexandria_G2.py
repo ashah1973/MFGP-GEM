@@ -67,18 +67,18 @@ Load the high and low fidelity data according to the selected quantity
 '''
 
 if quantity_predict in quantities_1:
-    data_high_all = np.loadtxt('/Users/akeelshah/Dropbox/Matlab Codes/GPAutoregForMutiFidelity/AlexandriaLib 2/tables/Dipole_polar_B3.txt')
-    data_low_all = np.loadtxt('/Users/akeelshah/Dropbox/Matlab Codes/GPAutoregForMutiFidelity/AlexandriaLib 2/tables/Dipole_polar_HF.txt')
+    data_high_all = np.loadtxt('Dipole_polar_B3.txt')
+    data_low_all = np.loadtxt('Dipole_polar_HF.txt')
     high_tmp = data_high_all[:,indx]
     low_tmp = data_low_all[:,indx]
-    with open('/Users/akeelshah/Dropbox/Matlab Codes/GPAutoregForMutiFidelity/AlexandriaLib 2/tables/InChi.txt', 'r') as file:
+    with open('InChi.txt', 'r') as file:
         inchi_strings = file.readlines()
 elif quantity_predict in quantities_2:
-    data_high_all = np.loadtxt('/Users/akeelshah/Dropbox/Matlab Codes/GPAutoregForMutiFidelity/AlexandriaLib 2/tables/Properties_G2.txt')
-    data_low_all = np.loadtxt('/Users/akeelshah/Dropbox/Matlab Codes/GPAutoregForMutiFidelity/AlexandriaLib 2/tables/Properties_CBSQB3.txt')
+    data_high_all = np.loadtxt('Properties_G2.txt')
+    data_low_all = np.loadtxt('Properties_CBSQB3.txt')
     high_tmp = data_high_all[:,indx]
     low_tmp = data_low_all[:,indx]
-    with open('/Users/akeelshah/Dropbox/Matlab Codes/GPAutoregForMutiFidelity/AlexandriaLib 2/tables/InChi_CBSQB3.txt', 'r') as file:
+    with open('InChi_CBSQB3.txt', 'r') as file:
         inchi_strings = file.readlines()
         
 from rdkit import Chem
@@ -115,28 +115,28 @@ data_high  = np.array(data_high)
 # Load the data according the quantity selected
 if quantity_predict in quantities_1:
     # The diffusion map based descriptor (see separate code for generating this)
-    input_matrix_graph = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/input_matrix_graph.csv",delimiter=",", skip_header=False)
+    input_matrix_graph = np.genfromtxt("input_matrix_graph.csv",delimiter=",", skip_header=False)
     # The redcuced dimensional versions of the additional descriptor
     if input_reduce == 'pca':
-        estateI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/Estate_pca_50.csv",delimiter=",", skip_header=False)    
-        maccsI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/MACCs_pca_50.csv",delimiter=",", skip_header=False)
+        estateI = np.genfromtxt("Estate_pca_50.csv",delimiter=",", skip_header=False)    
+        maccsI = np.genfromtxt("MACCs_pca_50.csv",delimiter=",", skip_header=False)
     elif input_reduce == 'spca':
-        estateI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/Estate_spca_25.csv",delimiter=",", skip_header=False)    
-        maccsI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/MACCs_spca_25.csv",delimiter=",", skip_header=False)
+        estateI = np.genfromtxt("Estate_spca_25.csv",delimiter=",", skip_header=False)    
+        maccsI = np.genfromtxt("MACCs_spca_25.csv",delimiter=",", skip_header=False)
     else:
-        estateI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/Estate_kpca_25.csv",delimiter=",", skip_header=False)    
-        maccsI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/MACCs_kpca_25.csv",delimiter=",", skip_header=False)
+        estateI = np.genfromtxt("Estate_kpca_25.csv",delimiter=",", skip_header=False)    
+        maccsI = np.genfromtxt("MACCs_kpca_25.csv",delimiter=",", skip_header=False)
 elif quantity_predict in quantities_2:
-    input_matrix_graph = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/CBS/input_matrix_graph.csv",delimiter=",", skip_header=False)
+    input_matrix_graph = np.genfromtxt("input_matrix_graph_cbs.csv",delimiter=",", skip_header=False)
     if input_reduce == 'pca':
-        estateI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/CBS/Estate_pca_100.csv",delimiter=",", skip_header=False)    
-        maccsI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/CBS/MACCs_pca_100.csv",delimiter=",", skip_header=False)
+        estateI = np.genfromtxt("Estate_pca_100_cbs.csv",delimiter=",", skip_header=False)    
+        maccsI = np.genfromtxt("MACCs_pca_100_cbs.csv",delimiter=",", skip_header=False)
     elif input_reduce == 'spca':
-        estateI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/CBS/Estate_spca_50.csv",delimiter=",", skip_header=False)    
-        maccsI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/CBS/MACCs_spca_50.csv",delimiter=",", skip_header=False)
+        estateI = np.genfromtxt("Estate_spca_50_cbs.csv",delimiter=",", skip_header=False)    
+        maccsI = np.genfromtxt("MACCs_spca_50_cbs.csv",delimiter=",", skip_header=False)
     else:
-        estateI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/CBS/Estate_kpca_50.csv",delimiter=",", skip_header=False)    
-        maccsI = np.genfromtxt("/Users/akeelshah/Dropbox/Python Codes Main Folder/qeCalculations main/Machine learning inputs/Alex/CBS/MACCs_kpca_50.csv",delimiter=",", skip_header=False)
+        estateI = np.genfromtxt("Estate_kpca_50_cbs.csv",delimiter=",", skip_header=False)    
+        maccsI = np.genfromtxt("MACCs_kpca_50_cbs.csv",delimiter=",", skip_header=False)
 
 if descriptor == 'maccs':
     X_tmp = maccsI
